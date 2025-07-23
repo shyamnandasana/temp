@@ -1,0 +1,83 @@
+﻿@model BookModel
+
+
+@{
+    ViewData["Title"] = Model.BookId == 0 ? "Add Book" : "Edit Book";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Index" method="post" enctype="multipart/form-data">
+    @if (Model.BookId != 0)
+    {
+        <input type="hidden" asp-for="BookId" />
+    }
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Isbn"></label>
+        <input asp-for="Isbn" class="form-control" />
+        <span asp-validation-for="Isbn" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Stock"></label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorId">Author</label>
+        <select asp-for="AuthorId" asp-items="@(new SelectList(Model.AuthorList, "AuthorId", "Name"))" class="form-control">
+            <option value="">-- Select Author --</option>
+        </select>
+        <span asp-validation-for="AuthorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublisherId">Publisher</label>
+        <select asp-for="PublisherId" asp-items="@(new SelectList(Model.PublisherList, "PublisherId", "Name"))" class="form-control">
+            <option value="">-- Select Publisher --</option>
+        </select>
+        <span asp-validation-for="PublisherId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LanguageId">Language</label>
+        <select asp-for="LanguageId" asp-items="@(new SelectList(Model.LanguageList, "LanguageId", "LanguageName"))" class="form-control">
+            <option value="">-- Select Language --</option>
+        </select>
+        <span asp-validation-for="LanguageId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.CategoryList, "CategoryId", "CategoryName"))" class="form-control">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BookImg">Book Image</label>
+        <input asp-for="BookImg" type="text" class="form-control" />
+        <span asp-validation-for="BookImg" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
